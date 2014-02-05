@@ -1,4 +1,4 @@
-2D_game
+Wolf
 =======
 
 Jeu 2D exclusivement JAVA
