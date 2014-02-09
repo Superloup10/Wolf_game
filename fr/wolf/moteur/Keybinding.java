@@ -51,21 +51,6 @@ public class Keybinding
 					System.out.println("Pause");
 				}
 			}
-			/*else
-			{
-				if(Keyboard.getEventKey() == Keyboard.KEY_L)
-				{
-					System.out.println("L Key Released");
-				}
-				if(Keyboard.getEventKey() == Keyboard.KEY_S)
-				{
-					System.out.println("S Key Released");
-				}
-				if(Keyboard.getEventKey() == Keyboard.KEY_D)
-				{
-					System.out.println("D Key Released");
-				}
-			}*/
 		}
 	}
 }

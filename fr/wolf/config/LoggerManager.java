@@ -1,4 +1,4 @@
-/*package fr.wolf.config;
+package fr.wolf.config;
 
 import java.io.BufferedWriter;
 import java.nio.charset.StandardCharsets;
@@ -61,7 +61,7 @@ public class LoggerManager
 		{
 			try
 			{
-				writer.write(record.getMessage("<" + getDate() + "> [" + record.getLevel().getLocalizedName() + "] " + record.getMessage()) + "\n");
+				writer.write(record.getMessage() + "<" + getDate() + "> [" + record.getLevel().getLocalizedName() + "] " + record.getMessage() + "\n");
 			}catch(Exception e)
 			{
 				System.err.println("[GRAVE] Erreur lors de l'écriture du fichier log.");
@@ -87,4 +87,4 @@ public class LoggerManager
 			System.out.println("<" + getDate() + "> [Infos] OK !");
 		}
 	}
-}*/
+}
