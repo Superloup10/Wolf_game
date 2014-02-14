@@ -4,4 +4,8 @@
 	<comment>French (fr_FR) Localization File</comment>
 <!-- Default French translation-->
 <!-- NOTE THE SPACE BEFORE/AFTER SOME OF THE LINES. -->
+	<!-- Settings -->
+	<entry key="options.difficulty.easy">Facile</entry>
+	<entry key="options.difficulty.moyen">Moyen</entry>
+	<entry key="options.difficulty.hard">Difficile</entry>
 </properties>

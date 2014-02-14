@@ -15,7 +15,7 @@ public class LanguageManager
 	
 	public LanguageManager(File file)
 	{
-		this.langFile = new File(file, "./fr_FR.xml");
+		this.langFile = new File(file, "fr_FR.xml");
 		instance = this;
 		
 		if(langFile.exists())

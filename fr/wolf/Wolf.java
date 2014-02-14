@@ -1,14 +1,11 @@
 package fr.wolf;
 
-//import java.io.File;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
-//import fr.wolf.lang.LanguageManager;
 import fr.wolf.moteur.Keybinding;
 import fr.wolf.moteur.collision.entity.DummyEntity;
 import fr.wolf.moteur.collision.entity.EntityManager;
@@ -17,12 +14,7 @@ import fr.wolf.moteur.collision.entity.Player;
 public class Wolf
 {
 	int fps;
-	long lastFps;
-	
-	//File langFile;
-	
-	//public LanguageManager languageManager = new LanguageManager(langFile);
-	
+	long lastFps;	
 	private long lastFrame;
 
 	public Player player = new Player(10, 10, 150, 150);
@@ -52,7 +44,6 @@ public class Wolf
 		while (!Display.isCloseRequested())
 		{
 			// render OpenGL here
-			//languageManager.instance.equals(langFile);
 			Keybinding.input();
 			render();
 			update();
