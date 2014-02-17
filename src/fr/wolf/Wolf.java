@@ -6,20 +6,25 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import fr.wolf.entity.Player;
 import fr.wolf.moteur.Keybinding;
 import fr.wolf.moteur.collision.entity.DummyEntity;
 import fr.wolf.moteur.collision.entity.EntityManager;
-import fr.wolf.moteur.collision.entity.Player;
+import fr.wolf.moteur.collision.entity.Tile;
 
 public class Wolf
 {
 	int fps;
 	long lastFps;	
 	private long lastFrame;
+	
+	public static World world = new World();
 
 	public Player player = new Player(10, 10, 150, 150);
 	public DummyEntity dummy = new DummyEntity(10, 10, 280, 280);
 	public EntityManager entityManager = new EntityManager();
+	
+	public Tile tile = new Tile(150, 450);
 
 	public void start()
 	{
@@ -40,6 +45,7 @@ public class Wolf
 		entityManager.registerEntity(player);
 		entityManager.registerEntity(dummy);
 		entityManager.init();
+		world.tiles.add(tile);
 		lastFps = getTime();
 		while (!Display.isCloseRequested())
 		{

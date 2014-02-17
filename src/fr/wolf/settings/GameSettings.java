@@ -22,8 +22,8 @@ public class GameSettings
 
 	protected Wolf wolf;
 	private File optionsFile;
-    public EnumDifficulty difficulty;
-    public String language;
+	public EnumDifficulty difficulty;
+	public String language;
 
 	public GameSettings(Wolf wolf, File file)
 	{
@@ -39,70 +39,70 @@ public class GameSettings
 		 * "key.category.gameplay"); this.keybindWard = new
 		 * Keybinding("key.Ward", 0, "key.category.gameplay");
 		 */
-        this.difficulty = EnumDifficulty.NORMAL;
-        this.language = "fr_FR";
+		this.difficulty = EnumDifficulty.NORMAL;
+		this.language = "fr_FR";
 		this.wolf = wolf;
 		this.optionsFile = new File(file, "options.txt");
-        this.loadOptions();
+		this.loadOptions();
 	}
 
 	public GameSettings()
 	{
-        this.difficulty = EnumDifficulty.NORMAL;
-        this.language = "fr_FR";
+		this.difficulty = EnumDifficulty.NORMAL;
+		this.language = "fr_FR";
 	}
-	
+
 	public void loadOptions()
 	{
-		 try
-		 {
-			 if (!this.optionsFile.exists())
-	         {
-				 return;
-	         }
+		try
+		{
+			if (!this.optionsFile.exists())
+			{
+				return;
+			}
 
-	         BufferedReader bufferedreader = new BufferedReader(new FileReader(this.optionsFile));
-	         String s = "";
+			BufferedReader bufferedreader = new BufferedReader(new FileReader(this.optionsFile));
+			String s = "";
 
-	         while((s = bufferedreader.readLine()) != null)
-	         {
-	        	 try
-	             {
-	        		 String[] astring = s.split(":");
-	                    
-	                 if(astring[0].equals("difficulty"))
-	                 {
-	                        this.difficulty = EnumDifficulty.getDifficultyEnum(Integer.parseInt(astring[1]));
-	                 }
-	                    
-	                 if(astring[0].equals("lang") && astring.length >= 2)
-	                 {
-	                        this.language = astring[1];
-	                 }
-	             }catch (Exception exception)
-	             {
-	            	 System.out.println(exception);
-	             }
-	        }
-	        bufferedreader.close();
-	    }catch(Exception exception1)
-	    {
-	          System.out.println(exception1);  	
-	    }
+			while ((s = bufferedreader.readLine()) != null)
+			{
+				try
+				{
+					String[] astring = s.split(":");
+
+					if(astring[0].equals("difficulty"))
+					{
+						this.difficulty = EnumDifficulty.getDifficultyEnum(Integer.parseInt(astring[1]));
+					}
+
+					if(astring[0].equals("lang") && astring.length >= 2)
+					{
+						this.language = astring[1];
+					}
+				} catch(Exception exception)
+				{
+					System.out.println(exception);
+				}
+			}
+			bufferedreader.close();
+		} catch(Exception exception1)
+		{
+			System.out.println(exception1);
+		}
 	}
-	
+
 	public void saveOptions()
-    {
+	{
 		try
 		{
 			PrintWriter printwriter = new PrintWriter(new FileWriter(this.optionsFile));
 			printwriter.println("difficulty:" + this.difficulty.getDifficultyId());
-            printwriter.println("lang:" + this.language);
-            
-            printwriter.close();
-		}catch(Exception exception)
+			printwriter.println("lang:" + this.language);
+
+			printwriter.close();
+		} catch(Exception exception)
 		{
 			System.out.println(exception);
 		}
-    }
+	}
 }
