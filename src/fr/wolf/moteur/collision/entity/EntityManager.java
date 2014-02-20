@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.wolf.Wolf;
-import fr.wolf.World;
+import fr.wolf.world.World;
 
 public class EntityManager
 {

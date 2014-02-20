@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.wolf.Wolf;
-import fr.wolf.World;
 import fr.wolf.moteur.collision.utils.AABB;
 import fr.wolf.moteur.collision.utils.CollisionLibrary;
 import fr.wolf.moteur.collision.utils.Vector;
+import fr.wolf.world.World;
 
 public abstract class Entity
 {

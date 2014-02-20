@@ -11,6 +11,7 @@ import fr.wolf.moteur.Keybinding;
 import fr.wolf.moteur.collision.entity.DummyEntity;
 import fr.wolf.moteur.collision.entity.EntityManager;
 import fr.wolf.moteur.collision.entity.Tile;
+import fr.wolf.world.World;
 
 public class Wolf
 {

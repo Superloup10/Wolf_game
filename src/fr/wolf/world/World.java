@@ -1,4 +1,4 @@
-package fr.wolf;
+package fr.wolf.world;
 
 import java.util.ArrayList;
 import java.util.List;

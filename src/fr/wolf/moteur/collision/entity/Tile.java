@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import fr.wolf.World;
 import fr.wolf.moteur.collision.utils.AABB;
 import fr.wolf.moteur.collision.utils.Vector;
+import fr.wolf.world.World;
 
 public class Tile
 {
