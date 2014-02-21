@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.wolf.moteur.collision.entity.Entity;
 import fr.wolf.moteur.collision.entity.Tile;
+import fr.wolf.world.enums.EnumWorld;
 
 public class World
 {
@@ -12,6 +13,7 @@ public class World
 
 	public List<Entity> entities = new ArrayList<Entity>();
 	public List<Tile> tiles = new ArrayList<Tile>();
+	public EnumWorld world;
 
 	public World()
 	{

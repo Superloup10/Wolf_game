@@ -1,4 +1,4 @@
-package fr.wolf.settings.Enums;
+package fr.wolf.settings.enums;
 
 public enum EnumDifficulty
 {

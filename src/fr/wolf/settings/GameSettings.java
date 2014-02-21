@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 
 import fr.wolf.Wolf;
 import fr.wolf.moteur.Keybinding;
-import fr.wolf.settings.Enums.EnumDifficulty;
+import fr.wolf.settings.enums.EnumDifficulty;
 
 public class GameSettings
 {
