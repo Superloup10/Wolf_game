@@ -2,6 +2,7 @@ package fr.wolf;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -48,7 +49,7 @@ public class Wolf
 		entityManager.init();
 		world.tiles.add(tile);
 		lastFps = getTime();
-		while (!Display.isCloseRequested())
+		while (!Display.isCloseRequested() && !(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)))
 		{
 			// render OpenGL here
 			Keybinding.input();
