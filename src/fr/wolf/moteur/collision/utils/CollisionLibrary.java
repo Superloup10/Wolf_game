@@ -4,11 +4,9 @@ public class CollisionLibrary
 {
 	public static boolean testAABBAABB(final AABB box1, final AABB box2)
 	{
-		if (Math.abs(box1.center.x - box2.center.x) > (box1.r[0] + box2.r[0]))
-			return false;
-		if (Math.abs(box1.center.y - box2.center.y) > (box1.r[1] + box2.r[1]))
-			return false;
-		return true;
+		if((box2.center.x >= box1.center.x + box1.w) || (box2.center.x + box2.w <= box1.center.x) || (box2.center.y >= box1.center.y + box1.h) || (box2.center.y + box2.h <= box1.center.y))
+			return false;//Pas touché
+		return true;//touché
 	}
 
 	public static boolean testCircleCircle(final Circle c1, final Circle c2)
@@ -35,11 +33,11 @@ public class CollisionLibrary
 		float minX, minY, maxX, maxY;
 
 		// get the minX, maxX, minY and maxY points of the AABB
-		minX = aabb.center.x - aabb.r[0];
-		maxX = aabb.center.x + aabb.r[0];
+		minX = aabb.center.x - aabb.w;
+		maxX = aabb.center.x + aabb.w;
 
-		minY = aabb.center.y - aabb.r[1];
-		maxY = aabb.center.y + aabb.r[1];
+		minY = aabb.center.y - aabb.h;
+		maxY = aabb.center.y + aabb.h;
 
 		// test the bounds against the points X axis
 		v = p.x;

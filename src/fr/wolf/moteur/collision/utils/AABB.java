@@ -3,14 +3,14 @@ package fr.wolf.moteur.collision.utils;
 public class AABB
 {
 	public Vector center;
-	public float r[];
+	public float w;
+	public float h;
 
 	public AABB(final float width, final float height)
 	{
 		center = new Vector();
-		r = new float[2];
-		r[0] = width * 0.5f;
-		r[1] = height * 0.5f;
+		w = width * 0.5f;
+		h = height * 0.5f;
 	}
 	
 	public void update(final Vector position)
