@@ -9,7 +9,20 @@ public class CollisionLibrary
 		return true;//touché
 	}
 
-	public static boolean testCircleCircle(final Circle c1, final Circle c2)
+	//TODO Impossible à tester.
+	/*public static boolean testAABBSOL(final AABB box, final int sol)
+	{
+		if(box.center.y + box.h >= sol)
+		{
+			System.out.println("Sol non touché");
+			return false; //Pas touché
+		}
+		System.out.println("Sol touché");
+		return true; //touché
+	}*/
+	
+	//TODO Inutile pour l'instant
+	/*public static boolean testCircleCircle(final Circle c1, final Circle c2)
 	{
 		final float distSQ = c1.center.distSQ(c2.center);
 		final float radiusSum = c1.radius + c2.radius;
@@ -56,5 +69,5 @@ public class CollisionLibrary
 			sqDist += (v - maxY) * (v - maxY);
 
 		return sqDist;
-	}
+	}*/
 }
