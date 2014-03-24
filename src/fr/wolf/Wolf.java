@@ -26,7 +26,6 @@ import fr.wolf.entity.Player;
 import fr.wolf.moteur.Keybinding;
 import fr.wolf.moteur.collision.entity.DummyEntity;
 import fr.wolf.moteur.collision.entity.EntityManager;
-import fr.wolf.moteur.collision.entity.Tile;
 import fr.wolf.moteur.graphic.Sprite;
 import fr.wolf.moteur.graphic.SpriteSheet;
 import fr.wolf.world.World;
@@ -46,8 +45,6 @@ public class Wolf
 	public DummyEntity dummy = new DummyEntity(10, 10, 280, 280);
 	public EntityManager entityManager = new EntityManager();
 	
-	public Tile tile = new Tile(150, 450);
-
 	public void start()
 	{
 		try
@@ -76,7 +73,6 @@ public class Wolf
 		entityManager.registerEntity(player);
 		entityManager.registerEntity(dummy);
 		entityManager.init();
-		world.tiles.add(tile);
 		lastFps = getTime();
 		while (!Display.isCloseRequested() && !(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)))
 		{

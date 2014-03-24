@@ -92,22 +92,5 @@ public abstract class Entity
 		return false;
 	}
 
-	public boolean canGoto(int x, int y, Entity entity)
-	{
-		for(int i = 0; i < world.entities.size(); i++)
-		{
-			for(Tile tiles : world.tiles)
-			{
-				if (CollisionLibrary.testAABBAABB(entity.aabb, tiles.aabb)) {
-					return false;
-				} else
-				{
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	public abstract void onCollide(Entity entity);
 }
