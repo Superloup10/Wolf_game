@@ -31,9 +31,11 @@ public abstract class Entity
 		this.position.y = y;
 	}
 
+	public Entity() {}
+
 	public abstract void init();
 
-	public abstract void render();
+	//public abstract void render();
 
 	public void update(int delta)
 	{

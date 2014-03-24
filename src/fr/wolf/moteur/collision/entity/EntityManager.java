@@ -33,13 +33,13 @@ public class EntityManager
 		}
 	}
 
-	public void render()
+	/*public void render()
 	{
 		for(Entity entity : entities)
 		{
 			entity.render();
 		}
-	}
+	}*/
 
 	public void registerEntity(Entity entity)
 	{

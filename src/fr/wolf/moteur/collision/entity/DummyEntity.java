@@ -15,7 +15,7 @@ public class DummyEntity extends Entity
 
 	}
 
-	@Override
+	/*@Override
 	public void render()
 	{
 		// GameClassAABB.font.drawString(10, 40, "HitBox dummy : X : " +
@@ -30,7 +30,7 @@ public class DummyEntity extends Entity
 		GL11.glVertex2f(this.position.x - (w / 2), this.position.y + (h / 2));
 		GL11.glEnd();
 		GL11.glPopMatrix();
-	}
+	}*/
 
 	@Override
 	public void update(int delta)
