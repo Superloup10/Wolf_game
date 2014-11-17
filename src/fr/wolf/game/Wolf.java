@@ -4,7 +4,7 @@ import fr.wolf.engine.GameObject;
 import fr.wolf.engine.Physics;
 import fr.wolf.game.gameobjects.Player;
 import fr.wolf.game.gameobjects.Vampire;
-import fr.wolf.game.gameobjects.item.Cube;
+import fr.wolf.game.gameobjects.item.Wall;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -27,8 +27,44 @@ public class Wolf
         player = new Player(Display.getWidth() / 2 - Player.SIZE / 2, Display.getHeight() / 2 - Player.SIZE / 2);
 
         objects.add(player);
-        objects.add(new Cube(32, 32));
+        generateTestLevel();
+        // objects.add(new Cube(32, 32));
+        //
         objects.add(new Vampire(300, 500, 1));
+    }
+
+    public void generateTestLevel()
+    {
+        // Generate First Room
+        objects.add(new Wall(200, 200, 10, 300));
+        objects.add(new Wall(500, 200, 10, 100));
+        objects.add(new Wall(500, 400, 10, 100));
+        objects.add(new Wall(200, 200, 300, 10));
+        objects.add(new Wall(200, 500, 100, 10));
+        objects.add(new Wall(400, 500, 100, 10));
+
+        // Generate Hallway 1
+        objects.add(new Wall(300, 500, 10, 200));
+        objects.add(new Wall(400, 500, 10, 200));
+
+        // Generate Second Room
+        objects.add(new Wall(400, 700, 100, 10));
+        objects.add(new Wall(200, 700, 100, 10));
+        objects.add(new Wall(200, 700, 10, 300));
+        objects.add(new Wall(500, 700, 10, 300));
+        objects.add(new Wall(200, 1000, 300, 10));
+
+        // Generate Hallway 2
+        objects.add(new Wall(500, 300, 100, 10));
+        objects.add(new Wall(500, 400, 100, 10));
+
+        // Generate Boss Room
+        objects.add(new Wall(900, 200, 10, 300));
+        objects.add(new Wall(600, 200, 10, 100));
+        objects.add(new Wall(600, 400, 10, 100));
+        objects.add(new Wall(600, 200, 300, 10));
+        objects.add(new Wall(600, 500, 300, 10));
+
     }
 
     public void getInput()

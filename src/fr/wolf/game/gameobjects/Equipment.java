@@ -1,5 +1,6 @@
-package fr.wolf.engine;
+package fr.wolf.game.gameobjects;
 
+import fr.wolf.engine.Inventory;
 import fr.wolf.game.gameobjects.item.EquippableItem;
 
 public class Equipment
@@ -22,6 +23,7 @@ public class Equipment
             if(!deEquip(index))
                 return false;
         }
+        inventory.remove(item);
         equip[index] = item;
         return true;
     }

@@ -43,12 +43,29 @@ public class Main
     {
         Time.init();
 
+        int frames = 0;
+        long lastTime = System.nanoTime();
+        long totalTime = 0;
+
         while(!Display.isCloseRequested())
         {
+            long now = System.nanoTime();
+            long passed = now - lastTime;
+            lastTime = now;
+            totalTime += passed;
+
+            if(totalTime >= 1000000000)
+            {
+                // System.out.println(frames);
+                totalTime = 0;
+                frames = 0;
+            }
+
             Time.update();
             getInput();
             update();
             render();
+            frames++;
         }
     }
 

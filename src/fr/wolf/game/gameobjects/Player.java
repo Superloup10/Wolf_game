@@ -1,6 +1,5 @@
 package fr.wolf.game.gameobjects;
 
-import fr.wolf.engine.Equipment;
 import fr.wolf.engine.GameObject;
 import fr.wolf.engine.Inventory;
 import fr.wolf.game.Delay;
@@ -12,6 +11,8 @@ import fr.wolf.game.gameobjects.item.Item;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 
 public class Player extends StatObject
 {
@@ -27,6 +28,7 @@ public class Player extends StatObject
     private int facingDirection;
     private Delay attackDelay;
     private int attackDamage;
+    private int moveAmountX, moveAmountY;
 
     public Player(float x, float y)
     {
@@ -38,6 +40,8 @@ public class Player extends StatObject
         attackRange = 49;
         attackDamage = 1;
         facingDirection = 0;
+        moveAmountX = 0;
+        moveAmountY = 0;
         attackDelay.terminate();
     }
 
@@ -45,16 +49,36 @@ public class Player extends StatObject
     public void update()
     {
         // System.out.println("Stats: \n-Speed: " + getSpeed() + "\n-Level: " + getLevel() + "\n-MaxHP: " + getMaxHealth() + "\n-HP: " + getCurrentHealth() + "\n-Strength: " + getStrength() + "\n-Magic: " + getMagic());
-        ArrayList<GameObject> objects = Wolf.rectangleCollide(x, y, x + SIZE, y + SIZE);
+        float newX = x + moveAmountX;
+        float newY = y + moveAmountY;
+
+        moveAmountX = 0;
+        moveAmountY = 0;
+
+        ArrayList<GameObject> objects = Wolf.rectangleCollide(newX, newY, newX + SIZE, newY + SIZE);
+        ArrayList<GameObject> items = new ArrayList<GameObject>();
+
+        boolean move = true;
 
         for(GameObject go : objects)
         {
             if(go.getType() == ITEM_ID)
-            {
-                System.out.println("You just picked up " + ((Item)go).getName() + "!");
-                addItem((Item)go);
-                go.remove();
-            }
+                items.add(go);
+            if(go.isSolid())
+                move = false;
+        }
+
+        if(!move)
+            return;
+
+        x = newX;
+        y = newY;
+
+        for(GameObject go : items)
+        {
+            System.out.println("You just picked up " + ((Item)go).getName() + "!");
+            addItem((Item)go);
+            go.remove();
         }
     }
 
@@ -80,6 +104,20 @@ public class Player extends StatObject
             attack();
     }
 
+    private void move(float magX, float magY)
+    {
+        if(magX == 0 && magY == 1)
+            facingDirection = FORWARD;
+        if(magX == -1 && magY == 0)
+            facingDirection = LEFT;
+        if(magX == 0 && magY == -1)
+            facingDirection = BACKWARD;
+        if(magX == 1 && magY == 0)
+            facingDirection = RIGHT;
+        moveAmountX += 4.0F * magX * Time.getDelta();
+        moveAmountY += 4.0F * magY * Time.getDelta();
+    }
+
     public void attack()
     {
         System.out.println("We're attacking!");
@@ -87,7 +125,7 @@ public class Player extends StatObject
         ArrayList<GameObject> objects = new ArrayList<GameObject>();
 
         if(facingDirection == FORWARD)
-            objects = Wolf.rectangleCollide(x, y, x + SIZE, y + attackRange);
+            objects = Wolf.rectangleCollide(x, y, x + SIZE, y + attackRange + SIZE);
         else if(facingDirection == LEFT)
             objects = Wolf.rectangleCollide(x, y, x - attackRange + SIZE, y + SIZE);
         else if(facingDirection == BACKWARD)
@@ -122,18 +160,12 @@ public class Player extends StatObject
         attackDelay.restart();
     }
 
-    private void move(float magX, float magY)
+    @Override
+    public void render()
     {
-        if(magX == 0 && magY == 1)
-            facingDirection = FORWARD;
-        if(magX == -1 && magY == 0)
-            facingDirection = LEFT;
-        if(magX == 0 && magY == -1)
-            facingDirection = BACKWARD;
-        if(magX == 1 && magY == 0)
-            facingDirection = RIGHT;
-        x += getSpeed() * magX * Time.getDelta();
-        y += getSpeed() * magY * Time.getDelta();
+        GL11.glTranslatef(Display.getWidth() / 2 - Player.SIZE / 2, Display.getHeight() / 2 - Player.SIZE / 2, 0);
+        spr.render();
+        GL11.glTranslatef(-x, -y, 0);
     }
 
     public void addItem(Item item)
