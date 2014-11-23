@@ -4,6 +4,7 @@ import fr.wolf.engine.GameObject;
 import fr.wolf.engine.Physics;
 import fr.wolf.game.gameobjects.Player;
 import fr.wolf.game.gameobjects.Vampire;
+import fr.wolf.game.gameobjects.item.Cube;
 import fr.wolf.game.gameobjects.item.Wall;
 
 import java.awt.Rectangle;
@@ -28,9 +29,8 @@ public class Wolf
 
         objects.add(player);
         generateTestLevel();
-        // objects.add(new Cube(32, 32));
-        //
-        objects.add(new Vampire(300, 500, 1));
+        objects.add(new Cube(200, 400));
+        objects.add(new Vampire(300, 400, 1));
     }
 
     public void generateTestLevel()

@@ -33,7 +33,7 @@ public class Main
         Wolf.wolf = new Wolf();
     }
 
-    private static void cleanUp()
+    public static void cleanUp()
     {
         Display.destroy();
         Keyboard.destroy();
@@ -56,7 +56,7 @@ public class Main
 
             if(totalTime >= 1000000000)
             {
-                // System.out.println(frames);
+                System.out.println(frames);
                 totalTime = 0;
                 frames = 0;
             }

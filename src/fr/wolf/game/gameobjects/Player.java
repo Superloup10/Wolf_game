@@ -14,7 +14,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
-public class Player extends StatObject
+public class Player extends StatObject implements IEntity
 {
     public static final int SIZE = 32;
     public static final int FORWARD = 0;
@@ -49,36 +49,13 @@ public class Player extends StatObject
     public void update()
     {
         // System.out.println("Stats: \n-Speed: " + getSpeed() + "\n-Level: " + getLevel() + "\n-MaxHP: " + getMaxHealth() + "\n-HP: " + getCurrentHealth() + "\n-Strength: " + getStrength() + "\n-Magic: " + getMagic());
-        float newX = x + moveAmountX;
-        float newY = y + moveAmountY;
+        look();
+        canMove();
 
-        moveAmountX = 0;
-        moveAmountY = 0;
-
-        ArrayList<GameObject> objects = Wolf.rectangleCollide(newX, newY, newX + SIZE, newY + SIZE);
-        ArrayList<GameObject> items = new ArrayList<GameObject>();
-
-        boolean move = true;
-
-        for(GameObject go : objects)
+        if((stats.getCurrentHealth() <= 0))
         {
-            if(go.getType() == ITEM_ID)
-                items.add(go);
-            if(go.isSolid())
-                move = false;
-        }
-
-        if(!move)
-            return;
-
-        x = newX;
-        y = newY;
-
-        for(GameObject go : items)
-        {
-            System.out.println("You just picked up " + ((Item)go).getName() + "!");
-            addItem((Item)go);
-            go.remove();
+            death();
+            // Main.cleanUp();
         }
     }
 
@@ -104,7 +81,36 @@ public class Player extends StatObject
             attack();
     }
 
-    private void move(float magX, float magY)
+    @Override
+    public boolean canMove()
+    {
+        float newX = x + moveAmountX;
+        float newY = y + moveAmountY;
+
+        moveAmountX = 0;
+        moveAmountY = 0;
+
+        ArrayList<GameObject> objects = Wolf.rectangleCollide(newX, newY, newX + SIZE, newY + SIZE);
+
+        boolean move = true;
+
+        for(GameObject go : objects)
+        {
+            if(go.isSolid())
+                move = false;
+        }
+
+        if(!move)
+            return false;
+
+        x = newX;
+        y = newY;
+
+        return true;
+    }
+
+    @Override
+    public void move(float magX, float magY)
     {
         if(magX == 0 && magY == 1)
             facingDirection = FORWARD;
@@ -118,6 +124,7 @@ public class Player extends StatObject
         moveAmountY += 4.0F * magY * Time.getDelta();
     }
 
+    @Override
     public void attack()
     {
         System.out.println("We're attacking!");
@@ -176,5 +183,38 @@ public class Player extends StatObject
     public void addXP(float amount)
     {
         stats.addXP(amount);
+    }
+
+    @Override
+    public void look()
+    {
+        float newX = x + moveAmountX;
+        float newY = y + moveAmountY;
+
+        ArrayList<GameObject> objects = Wolf.rectangleCollide(newX, newY, newX + SIZE, newY + SIZE);
+        ArrayList<GameObject> items = new ArrayList<GameObject>();
+
+        for(GameObject go : objects)
+        {
+            if(go.getType() == ITEM_ID)
+                items.add(go);
+        }
+
+        for(GameObject go : items)
+        {
+            System.out.println("You just picked up " + ((Item)go).getName() + "!");
+            addItem((Item)go);
+            go.remove();
+        }
+    }
+
+    @Override
+    public void hunt()
+    {}
+
+    @Override
+    public void death()
+    {
+        remove();
     }
 }
