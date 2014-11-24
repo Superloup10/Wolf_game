@@ -110,8 +110,7 @@ public class Enemy extends StatObject implements IEntity
         moveAmountY = y + distanceY * Time.getDelta();
     }
 
-    @Override
-    public boolean canMove()
+    public boolean[] canMove2()
     {
         float newX = x + moveAmountX;
         float newY = y + moveAmountY;
@@ -121,21 +120,59 @@ public class Enemy extends StatObject implements IEntity
 
         ArrayList<GameObject> objects = Wolf.rectangleCollide(newX, newY, newX + SIZE, newY + SIZE);
 
-        boolean move = true;
+        boolean move[] = new boolean[4];
 
         for(GameObject go : objects)
         {
-            if(go.isSolid())
-                move = false;
-        }
+            float Wx = go.getX();
+            float Wy = go.getY();
 
-        if(!move)
-            return false;
+            float Ex = newX;
+            float Ey = newY;
+
+            // TODO prendre en compte l'épaisseur
+
+            if(Wx < Ex && Wy == Ey)
+            {
+                // no move in x-
+                if(go.isSolid())
+                    move[0] = false;
+                else
+                    move[0] = true;
+            }
+            if(Wx > Ex && Wy == Ey)
+            {
+                // no move in x+
+                if(go.isSolid())
+                    move[1] = false;
+                else
+                    move[1] = true;
+            }
+            if(Wy < Ey && Wx == Ex)
+            {
+                // no move in y-
+                if(go.isSolid())
+                    move[2] = false;
+                else
+                    move[2] = true;
+            }
+            if(Wy > Ey && Wx == Ex)
+            {
+                // no move in y+
+                if(go.isSolid())
+                    move[3] = false;
+                else
+                    move[3] = true;
+            }
+            // ##T
+            // JTET
+            // # T
+        }
 
         x = newX;
         y = newY;
 
-        return true;
+        return move;
     }
 
     @Override
@@ -147,8 +184,19 @@ public class Enemy extends StatObject implements IEntity
         if(Util.dist(x, y, getTarget().getX(), getTarget().getY()) > sightRange * 1.5F)
             target = null;
 
-        if(canMove())
-            move(targetX, targetY);
+        if(getTarget() != null)
+        {
+            if(canMove2()[0] && targetX < x)
+                move(-1, 0);// gauche
+            if(canMove2()[1] && targetX > x)
+                move(1, 0);// droite
+            if(canMove2()[2] && targetY < y)
+                move(0, -1);// bas
+            if(canMove2()[3] && targetY > y)
+                move(0, 1);// haut
+        }
+        // if(canMove() && getTarget() != null)
+        // move(targetX, targetY);
     }
 
     @Override
@@ -205,5 +253,11 @@ public class Enemy extends StatObject implements IEntity
         this.y = y;
         this.type = ENEMY_ID;
         this.spr = new Sprite(r, g, b, sx, sy);
+    }
+
+    @Override
+    public boolean canMove()
+    {
+        return false;
     }
 }

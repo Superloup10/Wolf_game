@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colorTheme id="20197" name="Color-Blind Black" modified="2013-09-18 14:47:32" author="jglrxavpok">
+    <occurrenceIndication color="#616161" />
+    <findScope color="#191919" />
+    <deletionIndication color="#FF0000" />
+    <singleLineComment color="#666666" bold="false" />
+    <multiLineComment color="#666666" bold="false" />
+    <commentTaskTag color="#666666" />
+    <javadoc color="#666666" bold="false" />
+    <javadocLink color="#666666" />
+    <javadocTag color="#800080" />
+    <javadocKeyword color="#800080" />
+    <class color="#CEDF84" bold="false" italic="true" />
+    <interface color="#CE84DF" />
+    <method color="#1C65CC" />
+    <methodDeclaration color="#CEDF84" italic="true" />
+    <bracket color="#FFFFFF" />
+    <number color="#9F9D5E" bold="true" italic="false" underline="false" strikethrough="false" />
+    <string color="#819D6D" bold="false" italic="false" underline="false" strikethrough="false" />
+    <operator color="#CC9393" />
+    <keyword color="#539BEF" bold="false" italic="false" />
+    <annotation color="#AE2FFF" />
+    <staticMethod color="#FFFFFF" />
+    <localVariable color="#F7C527" />
+    <localVariableDeclaration color="#F7C527" />
+    <field color="#FF8F00" bold="true" underline="false" strikethrough="false" />
+    <staticField color="#66B2BB" bold="false" italic="true" underline="false" strikethrough="false" />
+    <staticFinalField color="#66B2BB" bold="true" italic="true" underline="false" strikethrough="false" />
+    <deprecatedMember color="#FFFFFF" />
+    <enum color="#CEDF84" italic="true" />
+    <inheritedMethod color="#E3B735" bold="false" />
+    <abstractMethod color="#F1C436" />
+    <parameterVariable color="#069609" bold="false" />
+    <typeArgument color="#D9B0AC" bold="false" />
+    <typeParameter color="#CDB1AD" />
+    <constant color="#C0C0C0" bold="false" underline="false" strikethrough="false" />
+    <background color="#000000" />
+    <currentLine color="#222220" />
+    <foreground color="#808080" />
+    <lineNumber color="#999999" />
+    <selectionBackground color="#333333" />
+    <selectionForeground color="#00FFFF" />
+</colorTheme>

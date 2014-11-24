@@ -63,8 +63,7 @@ public class Wolf
         objects.add(new Wall(600, 200, 10, 100));
         objects.add(new Wall(600, 400, 10, 100));
         objects.add(new Wall(600, 200, 300, 10));
-        objects.add(new Wall(600, 500, 300, 10));
-
+        // objects.add(new Wall(600, 500, 300, 10));
     }
 
     public void getInput()
