@@ -2,14 +2,13 @@ package fr.wolf.game.gameobjects;
 
 import fr.wolf.engine.GameObject;
 import fr.wolf.engine.Sprite;
-import fr.wolf.game.Delay;
-import fr.wolf.game.Time;
-import fr.wolf.game.Util;
 import fr.wolf.game.Wolf;
+import fr.wolf.game.utils.Delay;
+import fr.wolf.game.utils.Util;
 
 import java.util.ArrayList;
 
-public class Enemy extends StatObject implements IEntity
+public class Enemy extends Entity
 {
     public static final int SIZE = 32;
     public static final int FORWARD = 0;
@@ -29,6 +28,7 @@ public class Enemy extends StatObject implements IEntity
 
     public Enemy(int level)
     {
+        super(GameObject.ENEMY_ID);
         stats = new Stats(level, false);
         target = null;
         attackDelay = new Delay(500);
@@ -62,121 +62,123 @@ public class Enemy extends StatObject implements IEntity
     }
 
     @Override
-    public void attack()
+    public boolean attack()
     {
         getTarget().damage(getAttackDamage());
         System.out.println("We're hit! :" + getTarget().getCurrentHealth() + "/" + getTarget().getMaxHealth());
         attackDelay.restart();
+        return true;
     }
 
     @Override
-    public void look()
+    public boolean look()
     {
         ArrayList<GameObject> objects = Wolf.sphereCollide(x, y, sightRange);
 
         for(GameObject go : objects)
             if(go.getType() == PLAYER_ID)
                 setTarget((StatObject)go);
+        return true;
     }
+
+    // @Override
+    // public void move(float magX, float magY)
+    // {
+    // float distanceX = (getTarget().getX() - x);
+    // float distanceY = (getTarget().getY() - y);
+    //
+    // if(magX == 0 && magY == 1)
+    // facingDirection = FORWARD;
+    // if(magX == -1 && magY == 0)
+    // facingDirection = LEFT;
+    // if(magX == 0 && magY == -1)
+    // facingDirection = BACKWARD;
+    // if(magX == 1 && magY == 0)
+    // facingDirection = RIGHT;
+    //
+    // float maxDistance = 4.0F * DAMPING;
+    //
+    // if(distanceX > maxDistance)
+    // distanceX = maxDistance;
+    // if(distanceX < -maxDistance)
+    // distanceX = -maxDistance;
+    //
+    // if(distanceY > maxDistance)
+    // distanceY = maxDistance;
+    // if(distanceY < -maxDistance)
+    // distanceY = -maxDistance;
+    //
+    // moveAmountX = x + distanceX * Time.getDelta();
+    // moveAmountY = y + distanceY * Time.getDelta();
+    // }
+
+    // public boolean[] canMove2()
+    // {
+    // float newX = x + moveAmountX;
+    // float newY = y + moveAmountY;
+    //
+    // moveAmountX = 0;
+    // moveAmountY = 0;
+    //
+    // ArrayList<GameObject> objects = Wolf.rectangleCollide(newX, newY, newX + SIZE, newY + SIZE);
+    //
+    // boolean move[] = new boolean[4];
+    //
+    // for(GameObject go : objects)
+    // {
+    // float Wx = go.getX();
+    // float Wy = go.getY();
+    //
+    // float Ex = newX;
+    // float Ey = newY;
+    //
+    // // TODO prendre en compte l'épaisseur
+    //
+    // if(Wx < Ex && Wy == Ey)
+    // {
+    // // no move in x-
+    // if(go.isSolid())
+    // move[0] = false;
+    // else
+    // move[0] = true;
+    // }
+    // if(Wx > Ex && Wy == Ey)
+    // {
+    // // no move in x+
+    // if(go.isSolid())
+    // move[1] = false;
+    // else
+    // move[1] = true;
+    // }
+    // if(Wy < Ey && Wx == Ex)
+    // {
+    // // no move in y-
+    // if(go.isSolid())
+    // move[2] = false;
+    // else
+    // move[2] = true;
+    // }
+    // if(Wy > Ey && Wx == Ex)
+    // {
+    // // no move in y+
+    // if(go.isSolid())
+    // move[3] = false;
+    // else
+    // move[3] = true;
+    // }
+    // // ##T
+    // // JTET
+    // // # T
+    // }
+    //
+    // x = newX;
+    // y = newY;
+    //
+    // return move;
+    // }
 
     @Override
-    public void move(float magX, float magY)
-    {
-        float distanceX = (getTarget().getX() - x);
-        float distanceY = (getTarget().getY() - y);
-
-        if(magX == 0 && magY == 1)
-            facingDirection = FORWARD;
-        if(magX == -1 && magY == 0)
-            facingDirection = LEFT;
-        if(magX == 0 && magY == -1)
-            facingDirection = BACKWARD;
-        if(magX == 1 && magY == 0)
-            facingDirection = RIGHT;
-
-        float maxDistance = 4.0F * DAMPING;
-
-        if(distanceX > maxDistance)
-            distanceX = maxDistance;
-        if(distanceX < -maxDistance)
-            distanceX = -maxDistance;
-
-        if(distanceY > maxDistance)
-            distanceY = maxDistance;
-        if(distanceY < -maxDistance)
-            distanceY = -maxDistance;
-
-        moveAmountX = x + distanceX * Time.getDelta();
-        moveAmountY = y + distanceY * Time.getDelta();
-    }
-
-    public boolean[] canMove2()
-    {
-        float newX = x + moveAmountX;
-        float newY = y + moveAmountY;
-
-        moveAmountX = 0;
-        moveAmountY = 0;
-
-        ArrayList<GameObject> objects = Wolf.rectangleCollide(newX, newY, newX + SIZE, newY + SIZE);
-
-        boolean move[] = new boolean[4];
-
-        for(GameObject go : objects)
-        {
-            float Wx = go.getX();
-            float Wy = go.getY();
-
-            float Ex = newX;
-            float Ey = newY;
-
-            // TODO prendre en compte l'épaisseur
-
-            if(Wx < Ex && Wy == Ey)
-            {
-                // no move in x-
-                if(go.isSolid())
-                    move[0] = false;
-                else
-                    move[0] = true;
-            }
-            if(Wx > Ex && Wy == Ey)
-            {
-                // no move in x+
-                if(go.isSolid())
-                    move[1] = false;
-                else
-                    move[1] = true;
-            }
-            if(Wy < Ey && Wx == Ex)
-            {
-                // no move in y-
-                if(go.isSolid())
-                    move[2] = false;
-                else
-                    move[2] = true;
-            }
-            if(Wy > Ey && Wx == Ex)
-            {
-                // no move in y+
-                if(go.isSolid())
-                    move[3] = false;
-                else
-                    move[3] = true;
-            }
-            // ##T
-            // JTET
-            // # T
-        }
-
-        x = newX;
-        y = newY;
-
-        return move;
-    }
-
-    @Override
-    public void hunt()
+    public boolean hunt()
     {
         float targetX = getTarget().getX();
         float targetY = getTarget().getY();
@@ -184,25 +186,20 @@ public class Enemy extends StatObject implements IEntity
         if(Util.dist(x, y, getTarget().getX(), getTarget().getY()) > sightRange * 1.5F)
             target = null;
 
-        if(getTarget() != null)
-        {
-            if(canMove2()[0] && targetX < x)
-                move(-1, 0);// gauche
-            if(canMove2()[1] && targetX > x)
-                move(1, 0);// droite
-            if(canMove2()[2] && targetY < y)
-                move(0, -1);// bas
-            if(canMove2()[3] && targetY > y)
-                move(0, 1);// haut
-        }
+        // if(getTarget() != null)
+        // {
+        // if(canMove2()[0] && targetX < x)
+        // move(-1, 0);// gauche
+        // if(canMove2()[1] && targetX > x)
+        // move(1, 0);// droite
+        // if(canMove2()[2] && targetY < y)
+        // move(0, -1);// bas
+        // if(canMove2()[3] && targetY > y)
+        // move(0, 1);// haut
+        // }
         // if(canMove() && getTarget() != null)
         // move(targetX, targetY);
-    }
-
-    @Override
-    public void death()
-    {
-        remove();
+        return true;
     }
 
     public void setTarget(StatObject go)
@@ -253,11 +250,5 @@ public class Enemy extends StatObject implements IEntity
         this.y = y;
         this.type = ENEMY_ID;
         this.spr = new Sprite(r, g, b, sx, sy);
-    }
-
-    @Override
-    public boolean canMove()
-    {
-        return false;
     }
 }

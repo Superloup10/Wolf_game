@@ -1,6 +1,6 @@
 package fr.wolf.game.gameobjects;
 
-import fr.wolf.game.RPGRandom;
+import fr.wolf.game.utils.RPGRandom;
 
 public class StatScale
 {

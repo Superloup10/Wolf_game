@@ -41,14 +41,14 @@ public abstract class GameObject
         return y;
     }
 
-    public float getSy()
+    public float getSizeY()
     {
-        return spr.getSy();
+        return spr.getSizeY();
     }
 
-    public float getSx()
+    public float getSizeX()
     {
-        return spr.getSx();
+        return spr.getSizeX();
     }
 
     public int getType()

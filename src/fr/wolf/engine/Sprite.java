@@ -8,16 +8,16 @@ public class Sprite
     private float g;// green
     private float b;// blue
 
-    private float sx;
-    private float sy;
+    private float sizeX;
+    private float sizeY;
 
     public Sprite(float r, float g, float b, float sx, float sy)
     {
         this.r = r;
         this.g = g;
         this.b = b;
-        this.sx = sx;
-        this.sy = sy;
+        this.sizeX = sx;
+        this.sizeY = sy;
     }
 
     public void render()
@@ -27,30 +27,30 @@ public class Sprite
         GL11.glBegin(GL11.GL_QUADS);
         {
             GL11.glVertex2f(0, 0);
-            GL11.glVertex2f(0, sy);
-            GL11.glVertex2f(sx, sy);
-            GL11.glVertex2f(sx, 0);
+            GL11.glVertex2f(0, sizeY);
+            GL11.glVertex2f(sizeX, sizeY);
+            GL11.glVertex2f(sizeX, 0);
         }
         GL11.glEnd();
     }
 
-    public float getSx()
+    public float getSizeX()
     {
-        return sx;
+        return sizeX;
     }
 
-    public void setSx(float sx)
+    public void setSizeX(float size)
     {
-        this.sx = sx;
+        this.sizeX = size;
     }
 
-    public float getSy()
+    public float getSizeY()
     {
-        return sy;
+        return sizeY;
     }
 
-    public void setSy(float sy)
+    public void setSizeY(float size)
     {
-        this.sy = sy;
+        this.sizeY = size;
     }
 }

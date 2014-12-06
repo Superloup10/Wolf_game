@@ -1,4 +1,4 @@
-package fr.wolf.game;
+package fr.wolf.game.utils;
 
 public class Time
 {

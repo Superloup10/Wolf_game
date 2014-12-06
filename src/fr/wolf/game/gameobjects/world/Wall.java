@@ -1,4 +1,4 @@
-package fr.wolf.game.gameobjects.item;
+package fr.wolf.game.gameobjects.world;
 
 import fr.wolf.engine.GameObject;
 

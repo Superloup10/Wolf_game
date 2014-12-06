@@ -1,4 +1,4 @@
-package fr.wolf.game;
+package fr.wolf.game.utils;
 
 import java.util.Random;
 

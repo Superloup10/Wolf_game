@@ -1,7 +1,7 @@
 package fr.wolf.engine;
 
-import fr.wolf.game.Time;
 import fr.wolf.game.Wolf;
+import fr.wolf.game.utils.Time;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +31,7 @@ public class Main
     private static void initGame()
     {
         Wolf.wolf = new Wolf();
+        Wolf.getWolf().init();
     }
 
     public static void cleanUp()
@@ -56,7 +57,7 @@ public class Main
 
             if(totalTime >= 1000000000)
             {
-                System.out.println(frames);
+                // System.out.println(frames);
                 totalTime = 0;
                 frames = 0;
             }
